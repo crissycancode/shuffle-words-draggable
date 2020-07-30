@@ -10,9 +10,7 @@ function createElements(icon) {
   const val = document.createElement('i');
       val.classList.add('fas', icon, 'draggable');
       val.setAttribute('draggable', 'true');
-      // val.style.color = color;
       val.style.width = '200px';
-      // val.style.height = '100px';
       val.style.display= 'flex';
       val.style.alignItems = 'center';
       val.style.fontSize = '32px';
@@ -21,7 +19,6 @@ function createElements(icon) {
       val.style.transition = 'opacity 0.2s';
       val.id = icon;
       val.textContent = icon;
-      //val.style.paddingRight = '10px';
       val.style.fontFamily ='roboto, sans-serif';
   myelement.appendChild(val);
 }
@@ -33,14 +30,10 @@ function createBox(icon) {
 
     aval.classList.add('droppable');
     myelement.appendChild(aval);
-
-   
       const val = document.createElement('i');
       val.classList.add('fas', icon, 'droppable');
       val.setAttribute('draggable', 'true');
-      // val.style.color = color;
       val.style.width = '200px';
-      // val.style.height = '100px';
       val.style.display= 'flex';
       val.style.justifyContent = 'center';
       val.style.flexDirection = 'row'
@@ -51,7 +44,7 @@ function createBox(icon) {
       val.style.fontWeight = 'bold';
       val.style.backgroundColor = '#ffffff';
       val.style.color = '#ffffff';
-      val.style.border = '3px dashed #111111'
+      val.style.border = '3px dashed #111111';
       val.style.transition = 'border-width 0.2s, transform 0.2s, background-color 0.4s';
       val.id = icon;
       val.textContent = icon;
@@ -79,7 +72,7 @@ droppableElements.forEach(element => {
 
 function dragStart(e) {
   e.dataTransfer.setData('text', e.target.id);
-  console.log(e.target.id);
+  // console.log(e.target.id);
   
 }
 
@@ -103,23 +96,24 @@ function dragLeave(e){
 
 function drop(e) {
   e.preventDefault();
-  const tar = e.target;
-  tar.classList.remove("droppable-hover");
+  const target = e.target;
+  target.classList.remove("droppable-hover");
+
   const draggableElementData = e.dataTransfer.getData('text');
-  //const droppableElementData = tar.getAttribute('data-draggable-id');
-  const droppableElementData = tar.textContent;
+  // const droppableElementData = tar.getAttribute('data-draggable-id');
+  const droppableElementData = target.textContent;
 
   if(draggableElementData === droppableElementData){
     
-    tar.classList.add('dropped');
+    e.target.classList.add('dropped');
     const draggableElement = document.getElementById(draggableElementData);
-    tar.style.backgroundColor = draggableElement.style.color;
+    // tar.style.backgroundColor = draggableElement.style.color;
 
     draggableElement.classList.add('dragged');
     draggableElement.setAttribute('draggable', 'false');
-    console.log(draggableElement.id);
-    tar.innerHTML = '';
-    tar.innerHTML += `
+    // console.log(draggableElement.id);
+    target.innerHTML = '';
+    target.innerHTML += `
     <i class="draggable" 
       draggable="true" 
       style= "
@@ -136,8 +130,10 @@ function drop(e) {
         ${draggableElement.id}
     </i> 
     `;
-  }
 
+    
+  }
+  // sconsole.log('const: ' + draggableElement);
 }
 
 function dropOver(e) {
